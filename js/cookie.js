@@ -16,6 +16,12 @@ class Cookie {
     "./assets/images/SugarCookie-Highlighted@2x.png",
   ];
 
+  /**
+   * constructeur
+   * @param {*} type 
+   * @param {*} ligne 
+   * @param {*} colonne 
+   */
   constructor(type, ligne, colonne) {
     //instanciation des propriétés
     this.type = type;
@@ -31,19 +37,25 @@ class Cookie {
     this.htmlImage.className = 'cookies';
   }
 
+  //ajoute la class css 'cookies-selected'
   selectionnee() {
     // on change l'image et la classe CSS
     this.htmlImage.classList.add("cookies-selected");
     this.htmlImage.src = Cookie.urlsImagesSurlignees[this.type];
   }
 
+  //supprime la class css 'cookies-selected'
   deselectionnee() {
     // on change l'image et la classe CSS
     this.htmlImage.classList.remove("cookies-selected");
     this.htmlImage.src = Cookie.urlsImagesNormales[this.type];
   }
 
-  /** remplace les images sur les 2 objet Cookies */
+  /**
+   * remplace les images sur les 2 objet Cookies
+   * @param {*} c1 
+   * @param {*} c2 
+   */
   static swapCookies(c1, c2) {
     if(c1!=null && c2!=null && Cookie.distance(c1, c2)==1)
     {
@@ -66,7 +78,11 @@ class Cookie {
     return false;
   }
 
-  /** renvoie la distance entre deux cookies */
+  /**
+   * renvoie la distance entre deux cookies
+   * @param {*} cookie1 
+   * @param {*} cookie2 
+   */
   static distance(cookie1, cookie2) {
     let l1 = cookie1.ligne;
     let c1 = cookie1.colonne;

@@ -2,11 +2,19 @@
 Candy Crush Saga etc... c'est un match-3 game... */
 class Grille {
 
+  //array récupérant les cookies sélectionné par le clique du joueur
   cookieClicked = [];
 
+  //attribut enregistrant le cookie drag
   cookieDrag;
+  //attribut enregistrant le cookie qui obtiendra le cookie drop
   cookieDrop;
 
+  /**
+   * constructeur
+   * @param {*} l 
+   * @param {*} c 
+   */
   constructor(l, c) {
     this.l = l;
     this.c = c;
@@ -147,7 +155,7 @@ class Grille {
   }
 
   /**
-   * 
+   * permet d'obtenir un cookie selon la position (ligne & colonne)
    * @param {*} ligne 
    * @param {*} colonne 
    */
@@ -171,7 +179,7 @@ class Grille {
   }
 
   /**
-   * 
+   * supprime les alignements des lignes
    */
   deleteCumuls() {
 
@@ -236,7 +244,7 @@ class Grille {
   }
 
   /**
-   * 
+   * détecte les alignements des cookies (ligne et colonne)
    */
   detecteCumul()
   {
@@ -258,7 +266,7 @@ class Grille {
   }
 
   /**
-   * 
+   * détecte les alignements des cookies (ligne)
    * @param {*} numLigne 
    */
   detecteCumulLigne(numLigne) {
@@ -285,7 +293,7 @@ class Grille {
   }
 
   /**
-   * 
+   * détecte les alignements des cookies (colonne)
    * @param {*} numColonne 
    */
   detecteCumulColonne(numColonne) {

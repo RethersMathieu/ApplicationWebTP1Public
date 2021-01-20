@@ -4,8 +4,10 @@
 
 window.onload = init;
 
+//grille de la partie en cours
 let grille;
 
+//score
 var score = 0;
 
 function init() {
