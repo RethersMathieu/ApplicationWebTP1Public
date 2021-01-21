@@ -19,13 +19,13 @@ function create2DArray(rows) {
  */
 function addPoint() {
   score+=10;
-  update();
+  updateScore();
 }
 
 /**
  * met à jour l'affichage du score
  */
-function update() {
+function updateScore() {
   let newScore = "Score : " + score;
   document.querySelector("#score").textContent = newScore;
 }

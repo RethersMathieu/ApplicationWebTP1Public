@@ -95,7 +95,15 @@ class Grille {
 
       img.ondrop = (event) => {
         this.cookieDrop = this.getCookie(event.target.dataset.ligne, event.target.dataset.colonne);
-        Cookie.swapCookies(this.cookieDrag, this.cookieDrop)
+        
+        let typeCookieDrag = this.cookieDrag.type;
+
+        console.log(typeCookieDrag);
+
+        // console.log(this.detecteCumulColonneCookie(typeCookieDrag, event.target.dataset.ligne, event.target.dataset.colonne));
+
+        Cookie.swapCookies(this.cookieDrag, this.cookieDrop);
+
         this.clearDragDrop();
         this.deleteCumuls();
         console.log("Score : " + score);
@@ -322,4 +330,33 @@ class Grille {
     }
     return tabCumul;
   }
+
+  /* detecteCumulColonneCookie(type, ligne, colonne) {
+
+    console.log(type);
+
+    if((ligne>=0 && ligne<this.l) && (colonne>=0 && colonne<this.c)) {
+
+      let count = 0;
+
+      for(let m = ligne-1; m > 0; m--) {
+        console.log(m);
+        if(this.tabCookie[m][colonne].type === type) {
+          count++;
+        }
+      }
+
+      for(let d = ligne+1; d < this.c; d++) {
+        console.log(d);
+        if(this.tabCookie[d][colonne].type === type) {
+          count++;
+        }
+      }
+      
+      console.log("Count : " + count);
+
+      return count >= 3;
+    }
+    return false;
+  } */
 }
