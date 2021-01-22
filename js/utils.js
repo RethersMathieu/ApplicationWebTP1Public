@@ -29,3 +29,10 @@ function updateScore() {
   let newScore = "Score : " + score;
   document.querySelector("#score").textContent = newScore;
 }
+
+/**
+ * 
+ */
+function afficheAlignementPossible() {
+  
+}

@@ -37,18 +37,31 @@ class Cookie {
     this.htmlImage.className = 'cookies';
   }
 
-  //ajoute la class css 'cookies-selected'
+  /**
+   * ajoute la class css 'cookies-selected'
+   */
   selectionnee() {
     // on change l'image et la classe CSS
     this.htmlImage.classList.add("cookies-selected");
     this.htmlImage.src = Cookie.urlsImagesSurlignees[this.type];
   }
 
-  //supprime la class css 'cookies-selected'
+  /**
+   * supprime la class css 'cookies-selected'
+   */
   deselectionnee() {
     // on change l'image et la classe CSS
     this.htmlImage.classList.remove("cookies-selected");
     this.htmlImage.src = Cookie.urlsImagesNormales[this.type];
+  }
+
+  /**
+   * Remplace le type est l'image source selon le type rentrée en paramètre
+   * @param {*} newType 
+   */
+  remplacerParType(newType) {
+    this.type = newType;
+    this.htmlImage.src = Cookie.urlsImagesNormales[newType];
   }
 
   /**

@@ -17,7 +17,9 @@ function init() {
 
   grille = new Grille(9, 9);
   grille.showCookies();
-  // grille.detecteCumulColonneCookie(grille.tabCookie[0][0], 2, -1)
-  
+
+  let gridBonus = document.querySelector("#gridBonus");
+
+  gridBonus.style.setProperty('grid-template-columns', "repeat("+ gridBonus.childElementCount +", " + gridBonus.offsetWidth/gridBonus.childElementCount +"px)");
 
 }

@@ -105,7 +105,7 @@ class Grille {
         Cookie.swapCookies(this.cookieDrag, this.cookieDrop);
 
         this.clearDragDrop();
-        this.deleteCumuls();
+        this.deleteCookieAlignee();
         console.log("Score : " + score);
       }
 
@@ -189,13 +189,13 @@ class Grille {
   /**
    * supprime les alignements des lignes
    */
-  deleteCumuls() {
+  deleteCookieAlignee() {
 
     //Array qui récupére les cookies à remplacer
     let cookiesToDelete = [];
 
     //ajoute tout les cookies etant dans un cumul de cookie
-    this.detecteCumul().forEach( (cumul) => {
+    this.dectecteAlignement().forEach( (cumul) => {
       cumul.forEach( (cookie) => {
         if(!cookiesToDelete.includes(cookie)) {
           cookiesToDelete.push(cookie);
@@ -203,6 +203,7 @@ class Grille {
       });
     });
 
+    console.log(cookiesToDelete);
 
     //verifi si 'cookiesToDelete' ne soit pas vide
     if(cookiesToDelete.length != 0) {
@@ -219,9 +220,7 @@ class Grille {
 
             if(i == 0) {
               let newType = Math.floor(Cookie.urlsImagesNormales.length * Math.random());
-  
-              this.tabCookie[i][j].type = newType;
-              this.tabCookie[i][j].htmlImage.src = Cookie.urlsImagesNormales[newType];
+              this.tabCookie[i][j].remplacerParType(newType);
             }
             else {
 
@@ -231,15 +230,10 @@ class Grille {
                 if(g == 0) {
 
                   let newType = Math.floor(Cookie.urlsImagesNormales.length * Math.random());
-                  this.tabCookie[g][j].type = newType;
-                  this.tabCookie[g][j].htmlImage.src = Cookie.urlsImagesNormales[newType];
-
+                  this.tabCookie[g][j].remplacerParType(newType);
                 }
                 else {
-
-                  let cookiePrecedent = this.tabCookie[g-1][j];
-                  this.tabCookie[g][j].type = cookiePrecedent.type;
-                  this.tabCookie[g][j].htmlImage.src = cookiePrecedent.htmlImage.src;
+                  this.tabCookie[g][j].remplacerParType(this.tabCookie[g-1][j].type);
                   
                 }
               }
@@ -247,25 +241,25 @@ class Grille {
           }
         }
       }
-      this.deleteCumuls();
+      this.deleteCookieAlignee();
     }
   }
 
   /**
    * détecte les alignements des cookies (ligne et colonne)
    */
-  detecteCumul()
+  dectecteAlignement()
   {
     let tabCumul = [];
 
     for(let numLigne = 0; numLigne < this.l; numLigne++) {
-      this.detecteCumulLigne(numLigne).forEach( (cumulLigne) => {
+      this.detecterMatchLignes(numLigne).forEach( (cumulLigne) => {
         tabCumul.push(cumulLigne);
       });
     }
 
     for(let numColonne = 0; numColonne < this.l; numColonne++) {
-      this.detecteCumulColonne(numColonne).forEach( (cumulColonne) => {
+      this.detecterMatchColonnes(numColonne).forEach( (cumulColonne) => {
         tabCumul.push(cumulColonne);
       });
     }
@@ -277,7 +271,7 @@ class Grille {
    * détecte les alignements des cookies (ligne)
    * @param {*} numLigne 
    */
-  detecteCumulLigne(numLigne) {
+  detecterMatchLignes(numLigne) {
     let ligne = this.tabCookie[numLigne];
 
     let tabCumul = [];
@@ -304,7 +298,7 @@ class Grille {
    * détecte les alignements des cookies (colonne)
    * @param {*} numColonne 
    */
-  detecteCumulColonne(numColonne) {
+  detecterMatchColonnes(numColonne) {
     let colonne = [];
 
     this.tabCookie.forEach( (ligne) => {
@@ -331,32 +325,7 @@ class Grille {
     return tabCumul;
   }
 
-  /* detecteCumulColonneCookie(type, ligne, colonne) {
+  detecteAlignementPossible() {
 
-    console.log(type);
-
-    if((ligne>=0 && ligne<this.l) && (colonne>=0 && colonne<this.c)) {
-
-      let count = 0;
-
-      for(let m = ligne-1; m > 0; m--) {
-        console.log(m);
-        if(this.tabCookie[m][colonne].type === type) {
-          count++;
-        }
-      }
-
-      for(let d = ligne+1; d < this.c; d++) {
-        console.log(d);
-        if(this.tabCookie[d][colonne].type === type) {
-          count++;
-        }
-      }
-      
-      console.log("Count : " + count);
-
-      return count >= 3;
-    }
-    return false;
-  } */
+  }
 }
