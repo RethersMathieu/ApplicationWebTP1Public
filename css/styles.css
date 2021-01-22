@@ -88,6 +88,7 @@ body {
     font-size: 20px;
     color: white;
     padding: 20px;
+    background: linear-gradient(175deg,rgb(211, 48, 184), rgb(255, 145, 237));
 }
 
 #gridBonus .btnBonus span {

@@ -325,7 +325,55 @@ class Grille {
     return tabCumul;
   }
 
+  /**
+   * 
+   */
   detecteAlignementPossible() {
+    let tabAlignementPossible = [];
 
+    this.dectecteAlignementLigne().forEach( (alignementLigne) => {
+      tabAlignementPossible.push(alignementLigne);
+    });
+
+    this.dectecteAlignementColonne().forEach( (alignementColonne) => {
+      tabAlignementPossible.push(alignementColonne);
+    });
+
+    return tabAlignementPossible;
+  }
+
+  /**
+   * 
+   */
+  dectecteAlignementLigne() {
+    let tabAlignementPossible = [];
+    let cookieToPlacedFind = false;
+
+    for(let numColonne = 0; numColonne < this.c; numColonne++) {
+      let alignementPossible = [];
+
+      for(let numLigne = 0; numLigne < this.l-1; numLigne++) {
+        
+      }
+    }
+
+    return tabAlignementPossible;
+  }
+
+  /**
+   * 
+   */
+  dectecteAlignementColonne() {
+    let tabAlignementPossible = [];
+
+    for(let numLigne = 0; numLigne < this.c; numLigne++) {
+      let alignementPossible = [];
+
+      for(let numColonne = 0; numColonne < this.l-1; numColonne++) {
+
+      }
+    }
+
+    return tabAlignementPossible;
   }
 }

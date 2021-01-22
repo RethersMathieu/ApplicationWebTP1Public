@@ -34,5 +34,17 @@ function updateScore() {
  * 
  */
 function afficheAlignementPossible() {
-  
+  let tabCookieAfficher = [];
+
+  grille.detecteAlignementPossible().forEach( (alignements) => {
+    alignements.forEach( (cookie) => {
+      if(!tabCookieAfficher.includes(cookie)) {
+        tabCookieAfficher.push(cookie);
+      }
+    })
+  });
+
+  tabCookieAfficher.forEach(cookie => {
+    
+  });
 }
