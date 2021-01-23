@@ -15,11 +15,14 @@ function init() {
   // appelée quand la page et ses ressources sont prêtes.
   // On dit aussi que le DOM est ready (en fait un peu plus...)
 
-  grille = new Grille(9, 9);
-  grille.showCookies();
-
   let gridBonus = document.querySelector("#gridBonus");
 
   gridBonus.style.setProperty('grid-template-columns', "repeat("+ gridBonus.childElementCount +", " + gridBonus.offsetWidth/gridBonus.childElementCount +"px)");
+
+  grille = new Grille(9, 9);
+  grille.showCookies();
+  console.log("Alignement Colonne");
+  console.log(grille.dectecteAlignementColonne());
+  
 
 }
