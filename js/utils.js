@@ -33,18 +33,20 @@ function updateScore() {
 /**
  * 
  */
-function afficheAlignementPossible() {
+function afficheAlignement() {
   let tabCookieAfficher = [];
 
-  grille.detecteAlignementPossible().forEach( (alignements) => {
-    alignements.forEach( (cookie) => {
-      if(!tabCookieAfficher.includes(cookie)) {
-        tabCookieAfficher.push(cookie);
-      }
-    })
-  });
+  //ajoute tout les cookies etant dans un cumul de cookie
+  let tabAlignements = grille.dectecteAlignement();
 
-  tabCookieAfficher.forEach(cookie => {
-    
-  });
+  if(tabAlignements.length > 0) {
+    let nRandom = Math.floor(tabAlignements.length * Math.random());
+
+    tabAlignements[nRandom].forEach(cookie => {
+      cookie.selectionnee();
+    });
+  }
+  else {
+    alert("Aucun alignement");
+  }
 }

@@ -199,11 +199,10 @@ class Grille {
       cumul.forEach( (cookie) => {
         if(!cookiesToDelete.includes(cookie)) {
           cookiesToDelete.push(cookie);
+          cookie.deselectionnee();
         }
       });
     });
-
-    console.log(cookiesToDelete);
 
     //verifi si 'cookiesToDelete' ne soit pas vide
     if(cookiesToDelete.length != 0) {
@@ -325,144 +324,4 @@ class Grille {
     return tabCumul;
   }
 
-  /**
-   * 
-   */
-  detecteAlignementPossible() {
-    let tabAlignementPossible = [];
-
-    this.dectecteAlignementLigne().forEach( (alignementLigne) => {
-      tabAlignementPossible.push(alignementLigne);
-    });
-
-    this.dectecteAlignementColonne().forEach( (alignementColonne) => {
-      tabAlignementPossible.push(alignementColonne);
-    });
-
-    return tabAlignementPossible;
-  }
-
-  /**
-   * 
-   */
-  dectecteAlignementColonne() {
-    let tabAlignementPossible = [];
-
-    for(let numColonne = 0; numColonne < this.c; numColonne++) {
-      let alignementPossible = [];
-
-      for(let numLigne = 0; numLigne < this.l-1; numLigne++) {
-        
-        let cookieDeColonne;
-        let cookieVoisinDroite;
-        let cookieVoisinGauche;
-
-        let cookieSuivant = this.tabCookie[numLigne+1][numColonne];
-
-        let cookieADeplacerTrouver = false;
-        let continuer = false;
-        do {
-
-          if(numColonne == 0) {
-            cookieDeColonne = this.tabCookie[numLigne][numColonne];
-            cookieVoisinDroite = this.tabCookie[numLigne][numColonne+1];
-            cookieVoisinGauche = null;
-          }
-          else if(numColonne == this.c-1) {
-            cookieDeColonne = this.tabCookie[numLigne][numColonne];
-            cookieVoisinDroite = null;
-            cookieVoisinGauche = this.tabCookie[numLigne][numColonne-1];
-          }
-          else {
-            cookieDeColonne = this.tabCookie[numLigne][numColonne];
-            cookieVoisinDroite = this.tabCookie[numLigne][numColonne+1];
-            cookieVoisinGauche = this.tabCookie[numLigne][numColonne-1];
-          }
-
-
-          if(cookieVoisinDroite != null && cookieVoisinDroite.type === cookieSuivant.type && !cookieADeplacerTrouver) {
-            cookieADeplacerTrouver = true;
-            continuer = true;
-            if(alignementPossible.length == 0) {
-              alignementPossible.push(cookieVoisinDroite);
-            }
-            alignementPossible.push(cookieSuivant);
-          }
-          else if(cookieVoisinGauche != null && cookieVoisinGauche.type === cookieSuivant.type && !cookieADeplacerTrouver) {
-            cookieADeplacerTrouver = true;
-            continuer = true;
-            if(alignementPossible.length == 0) {
-              alignementPossible.push(cookieVoisinGauche);
-            }
-            alignementPossible.push(cookieSuivant);
-          }
-          else if(cookieDeColonne.type === cookieSuivant.type) {
-            continuer = true;
-            if(alignementPossible.length == 0) {
-              alignementPossible.push(cookieDeColonne);
-            }
-            alignementPossible.push(cookieSuivant);
-          }
-          else {
-            continuer = false;
-          }
-
-          if(numLigne == this.l-2) {
-            cookieSuivant = this.tabCookie[numLigne][numColonne];
-            if(numColonne == 0) {
-              cookieVoisinDroite = this.tabCookie[numLigne+1][numColonne+1];
-              if(cookieVoisinDroite.type === cookieSuivant.type) {
-                alignementPossible.push(cookieVoisinDroite)
-              }
-            }
-            else if(numColonne == this.c-1) {
-              cookieVoisinGauche = this.tabCookie[numLigne+1][numColonne-1];
-              if(cookieVoisinGauche.type === cookieSuivant.type) {
-                alignementPossible.push(cookieVoisinGauche)
-              }
-            }
-            else {
-              cookieVoisinDroite = this.tabCookie[numLigne+1][numColonne+1];
-              cookieVoisinGauche = this.tabCookie[numLigne+1][numColonne-1];
-              if(cookieVoisinDroite.type === cookieSuivant.type) {
-                alignementPossible.push(cookieVoisinDroite)
-              }
-              else if(cookieVoisinGauche.type === cookieSuivant.type) {
-                alignementPossible.push(cookieVoisinGauche)
-              }
-            }
-          }
-
-          if(continuer) {
-            numLigne++;
-          }
-
-        }while(continuer &&  numLigne < this.l-1);
-
-        if(alignementPossible.length >= 3) {
-          tabAlignementPossible.push(alignementPossible);
-        }
-
-      }
-    }
-
-    return tabAlignementPossible;
-  }
-
-  /**
-   * 
-   */
-  dectecteAlignementLigne() {
-    let tabAlignementPossible = [];
-
-    for(let numLigne = 0; numLigne < this.c; numLigne++) {
-      let alignementPossible = [];
-
-      for(let numColonne = 0; numColonne < this.l-1; numColonne++) {
-
-      }
-    }
-
-    return tabAlignementPossible;
-  }
 }
